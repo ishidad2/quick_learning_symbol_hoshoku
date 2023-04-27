@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>PaymentSample</title>
+</head>
+<body>
+  <h1>WebNFC Example</h1>
+  <button id="scanNFC">Scan NFC</button>
+  <pre id="output"></pre>
+  <script>
+    const scanButton = document.getElementById('scanNFC');
+    const outputElem = document.getElementById('output');
+
+    function log(message) {
+      outputElem.textContent += message + '\n';
+    }
+
+    async function readNFC() {
+      if ('NDEFReader' in window) {
+        const ndefReader = new NDEFReader();
+
+        try {
+          await ndefReader.scan();
+
+          log('NFC scanning...');
+
+          ndefReader.addEventListener('reading', ({ message, serialNumber }) => {
+            log(`NFC tag found! Serial number: ${serialNumber}`);
+
+            for (const record of message.records) {
+              log(`Record type: ${record.recordType}`);
+              log(`Record data: ${record.data}`);
+            }
+          });
+
+        } catch (error) {
+          log(`Error: ${error}`);
+        }
+      } else {
+        log('WebNFC is not supported on this device.');
+      }
+    }
+
+    scanButton.addEventListener('click', readNFC);
+  </script>
+</body>
+</html>
