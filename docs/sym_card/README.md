@@ -47,7 +47,8 @@ Email Address []:
 
 https://github.com/ishidad2/quick_learning_symbol_hoshoku/blob/main/codeSample/multisig_payment.ipynb
 
-↑こちらの5.アカウントのマルチシグ登録まで実行していれば各種Symbolアカウントは設定されています。
+↑こちらの5.アカウントのマルチシグ登録まで実行していれば各種Symbolアカウントは生成されていると思います。
+
 NFCカードへの書き込みはAndroidアプリで行ってください。
 
 私は[NFC Tools](https://play.google.com/store/apps/details?id=com.wakdev.wdnfc&hl=ja&gl=US)というのを使って書き込みました。
@@ -55,6 +56,8 @@ NFCには[こちら](https://github.com/ishidad2/quick_learning_symbol_hoshoku/b
 
 
 ## フロントエンドサーバーの起動（NFC読み取り）
+
+決済店用のアプリです。（本来はスマートフォンアプリを作成するべきですが、そこまでのスキルとモチベーションがないのでWEBで実装しています）
 
 ```
 npm run dev
@@ -72,6 +75,8 @@ SUB_BOT_PRIVATE_KEY=
 
 
 ## 自動署名サーバーの起動（署名Botサーバー）
+
+決済を行う際にNFCカードから通知されるトランザクションに自動署名するプログラムです。
 
 ```
 cd sig_server
