@@ -1,0 +1,106 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Custom Webpage</title>
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.0/dist/css/bootstrap.min.css" rel="stylesheet">
+  <style>
+    .form-container {
+      max-width: 600px;
+      margin: 0 auto;
+      padding-top: 50px;
+    }
+  </style>
+</head>
+<body>
+  <div class="container">
+    <div class="container px-4 py-5" id="hanging-icons">
+      <h2 class="pb-2 border-bottom">店舗設定</h2>
+      <div class="row g-4 py-5 row-cols-1 row-cols-lg-3">
+        <div class="form-container">
+          <form id="custom-form">
+            <div class="mb-3">
+              <label for="address" class="form-label">店舗アドレス（送信先）</label>
+              <input type="text" class="form-control" id="address" required>
+              <div class="invalid-feedback">
+                店舗アドレスを入力してください。
+              </div>
+            </div>
+            <div class="mb-3">
+              <label for="message" class="form-label">メッセージ</label>
+              <input type="text" class="form-control" id="message">
+            </div>
+            <div class="mb-3">
+              <label for="amount" class="form-label">数量</label>
+              <input type="number" step="0.000001" class="form-control" id="amount" required>
+              <div class="invalid-feedback">
+                数量を入力してください。（少数点第6位まで）
+              </div>
+            </div>
+            <button type="button" id="save-btn" class="btn btn-primary">設定</button>
+            <button type="button" id="back-btn" class="btn btn-secondary">戻る</button>
+          </form>
+        </div>
+      </div>
+    </div>
+  </div>
+  <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.9.3/dist/umd/popper.min.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.0/dist/js/bootstrap.min.js"></script>
+  <script>
+    document.addEventListener('DOMContentLoaded', () => {
+      const customForm = document.getElementById('custom-form');
+      const addressInput = document.getElementById('address');
+      const messageInput = document.getElementById('message');
+      const amountInput = document.getElementById('amount');
+      const saveBtn = document.getElementById('save-btn');
+      const backBtn = document.getElementById('back-btn');
+
+      // Load data from localStorage
+      addressInput.value = localStorage.getItem('address') || '';
+      messageInput.value = localStorage.getItem('message') || '';
+      amountInput.value = localStorage.getItem('amount') || '';
+
+      // Validation
+      const validateForm = () => {
+        let isValid = true;
+
+        if (!addressInput.value.trim()) {
+          addressInput.classList.add('is-invalid');
+          isValid = false;
+        } else {
+          addressInput.classList.remove('is-invalid');
+        }
+
+        const amountValue = parseFloat(amountInput.value);
+        const decimalPlaces = (amountInput.value.split('.')[1] || []).length;
+        const isamountValid = !isNaN(amountValue) && decimalPlaces <= 6;
+
+        if (!amountInput.value || !isamountValid) {
+          amountInput.classList.add('is-invalid');
+          isValid = false;
+        } else {
+          amountInput.classList.remove('is-invalid');
+        }
+        return isValid;
+      };
+
+
+      // Save data to localStorage
+      saveBtn.addEventListener('click', () => {
+        if (validateForm()) {
+          localStorage.setItem('address', addressInput.value);
+          localStorage.setItem('message', messageInput.value);
+          localStorage.setItem('amount', amountInput.value);
+          alert('入力値がローカルストレージに保存されました。');
+        }
+      });
+
+      // Go back
+      backBtn.addEventListener('click', () => {
+        window.history.back();
+      });
+    });
+  </script>
+</body>
+</html>

@@ -1,0 +1,21 @@
+{
+  "name": "sym_card",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "dev": "npx nodemon backend/server.js",
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "author": "",
+  "license": "ISC",
+  "dependencies": {
+    "dotenv": "^16.0.3",
+    "express": "^4.18.2",
+    "log4js": "^6.9.1",
+    "nodemon": "^2.0.22",
+    "rxjs": "^7.8.1",
+    "symbol-sdk": "^2.0.3",
+    "xmlhttprequest": "^1.8.0"
+  }
+}

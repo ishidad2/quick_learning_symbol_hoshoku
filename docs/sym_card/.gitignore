@@ -1,0 +1,6 @@
+node_modules
+backend/ssl/*
+
+sig_server/logs/*
+!sig_server/logs/.gitkeep
+sig_server/.env
