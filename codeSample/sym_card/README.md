@@ -58,6 +58,7 @@ NFCには[こちら](https://github.com/ishidad2/quick_learning_symbol_hoshoku/b
 ## フロントエンドサーバーの起動（NFC読み取り）
 
 決済店用のアプリです。（本来はスマートフォンアプリを作成するべきですが、そこまでのスキルとモチベーションがないのでWEBで実装しています）
+NFCカードの読み取りはスマートフォン（google chrome）でないと機能しません。（iOSは未検証だが恐らく無理だと思う）
 
 ```
 npm run dev
