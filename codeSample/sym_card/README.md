@@ -13,9 +13,9 @@ npm install
 ## https設定
 
 ```
+cd backend
 mkdir ssl && cd ssl
 openssl req -x509 -newkey rsa:2048 -keyout privatekey.pem -out cert.pem -nodes -days 365
-cd ..
 ```
 
 Contry Nameに”JP”を指定
@@ -66,7 +66,23 @@ npm run dev
 
 ## バックエンドサーバーの設定（現在は手動）
 
-.envに各プライベートキーを設定
+
+*アカウントの種類*
+
+「3-1.mutisig,main_bot,sub_bot,qr,bobアカウントの生成」で作成したアカウントは以下に対応します
+
+```
+mutisig：MULTISIG_PRIVATE_KEYへ設定
+main_bot：MAIN_BOT_PRIVATE_KEYへ設定
+sub_bot：SUB_BOT_PRIVATE_KEYへ設定
+qr：NFCカードへ書き込むアドレス（書き込みはプライベートキーのみ）
+bob：決済店アドレス
+```
+
+sig_server/.env.exampleを.envにリネーム後、各プライベートキーを設定
+
+https://github.com/ishidad2/quick_learning_symbol_hoshoku/blob/main/codeSample/sym_card/sig_server/.env.exapmle
+
 
 ```
 MULTISIG_PRIVATE_KEY=
